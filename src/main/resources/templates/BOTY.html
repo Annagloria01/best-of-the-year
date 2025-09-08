@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Best Of The Year</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='../static/main.css'>
+    <script src='main.js'></script>
+</head>
+
+<body>
+    <p>
+        Best of the year by: <span th:text="${name}"></span>
+    </p>
+
+    <p>
+        Movies: <span th:text="${movies}"></span>
+    </p>
+
+    <p>
+        Songs: <span th:text="${songs}"></span>
+    </p>
+</body>
+
+</html>
