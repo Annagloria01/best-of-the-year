@@ -17,5 +17,4 @@ public class Song extends Media {
         this.genre = genre;
     }
 
-
 }

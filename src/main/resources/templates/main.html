@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+    <div th:fragment="cardContent(pageName, content, media)">
+
+        <div th:if="${pageName == 'mainPage'}">
+            <div class="d-flex justify-content-center">
+                <h5>Best of by...</h5>
+            </div>
+            <div class="border border-warning d-flex justify-content-center">
+                <img class="img-fluid" src="https://purina.cl/sites/default/files/2025-04/razas-de-gatos.jpg"
+                    alt="gatti">
+            </div>
+            <div class="border border-secondary d-flex justify-content-center p-5">
+                <span th:text="${name}"></span>
+            </div>
+        </div>
+
+        <div th:unless="${pageName == 'mainPage'}">
+            <div th:if="${pageName == 'details'}">
+                <div class="container">
+                    <div class="text-center">
+                        <div class="card" style="width: 18rem;">
+                            <div class="card-body">
+                                <h5 class="card-title" th:text="|${media.id} - ${media.title}|"></h5>
+                                <h6 class="card-subtitle mb-2 text-muted" th:text="|Duration: ${media.duration}|"></h6>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div th:unless="${pageName == 'details'}">
+                <h4 th:text="|Best ${pageName}|" class="d-flex justify-content-center"></h4>
+                <ul class="list-group" th:if="${content.size() > 0}">
+                    <li class="list-group-item" th:each="item : ${content}">
+
+                        <a class="nav-link" th:href="|/${pageName}/${item.id}|">
+                            <span th:text="|${item.id} - ${item.title}|"></span>
+                        </a>
+                    </li>
+                </ul>
+
+                <p th:unless="${content.size() > 0}"> Non ci sono utenti in lista </p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

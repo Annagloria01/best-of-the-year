@@ -7,21 +7,26 @@
     <title>Best Of The Year</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='../static/main.css'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <script src='main.js'></script>
 </head>
 
-<body>
-    <p>
-        Best of the year by: <span th:text="${name}"></span>
-    </p>
-
-    <p>
-        Movies: <span th:text="${movies}"></span>
-    </p>
-
-    <p>
-        Songs: <span th:text="${songs}"></span>
-    </p>
+<body style="height: 100%;">
+    <div class="d-flex justify-content-center align-items-start min-vh-100 pt-5">
+        <div class="card border-dark" style="max-width: 600px;">
+            <div class="card-header d-flex align-items-center">
+                <span style="width: 100px;">
+                    <a href="/">Best of...</a>
+                </span>
+                <span class="ms-2" style="width: 100%;">
+                    <a class="btn btn-outline-secondary px-4" href="/movies" role="button">Movies</a>
+                    <a class="btn btn-outline-secondary px-4" href="/songs" role="button">Songs</a>
+                </span>
+            </div>
+            <div th:insert="~{main :: cardContent(${pageName}, ${content}, ${media})}" class="card-body p-5"></div>
+        </div>
+    </div>
 </body>
 
 </html>

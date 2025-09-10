@@ -1,6 +1,5 @@
 package code.annagloria.best_of_the_year.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -8,7 +7,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import code.annagloria.best_of_the_year.model.Movie;
 import code.annagloria.best_of_the_year.model.Song;
@@ -17,69 +15,52 @@ import code.annagloria.best_of_the_year.model.Song;
 @RequestMapping("/")
 public class BOTYController {
 
-    @GetMapping("/BOTY")
-    public String getName(@RequestParam String name, Model model) {
-        model.addAttribute("name", name);
+    @GetMapping("/")
+    public String getName(Model model) {
+        model.addAttribute("name", "Anna Gloria Buchynska");
+        model.addAttribute("pageName", "mainPage");
         return "BOTY";
     }
 
     @GetMapping("/movies")
     public String getMovies(Model model) {
-        List<Movie> movies = getBestMovies();
-
-        String titleNames = "";
-        for (int i = 0; i < movies.size(); i++) {
-            titleNames += movies.get(i).getTitle();
-            if (i < movies.size() - 1) {
-                titleNames += ", ";
-            }
-        }
-
-        model.addAttribute("movies", titleNames);
-        return "MOVIES";
+        model.addAttribute("content", getBestMovies());
+        model.addAttribute("pageName", "movies");
+        return "BOTY";
     }
 
     @GetMapping("/songs")
     public String getSongs(Model model) {
-        List<Song> songs = getBestSongs();
-
-        String titleNames = "";
-        for (int i = 0; i < songs.size(); i++) {
-            titleNames += songs.get(i).getTitle();
-            if (i < songs.size() - 1) {
-                titleNames += ", ";
-            }
-        }
-
-        model.addAttribute("songs", titleNames);
-        return "SONGS";
+        model.addAttribute("content", getBestSongs());
+        model.addAttribute("pageName", "songs");
+        return "BOTY";
     }
 
     @GetMapping("/movies/{id}")
     public String getMovie(@PathVariable String id, Model model) {
         List<Movie> movies = getBestMovies();
 
-        for(Movie element : movies){
-            if(element.getId().equals(id)){
-                model.addAttribute("movies", element.getTitle());
+        for (Movie element : movies) {
+            if (element.getId().equals(id)) {
+                model.addAttribute("media", element);
             }
         }
-        return "MOVIES";
+        model.addAttribute("pageName", "details");
+        return "BOTY";
     }
 
     @GetMapping("/songs/{id}")
     public String getSong(@PathVariable String id, Model model) {
         List<Song> songs = getBestSongs();
 
-        for(Song element : songs){
-            if(element.getId().equals(id)){
-                model.addAttribute("songs", element.getTitle());
+        for (Song element : songs) {
+            if (element.getId().equals(id)) {
+                model.addAttribute("media", element);
             }
         }
-        return "SONGS";
+        model.addAttribute("pageName", "details");
+        return "BOTY";
     }
-    
-    
 
     private List<Song> getBestSongs() {
         Song song1 = new Song("Heavy Metal", 355, "S1", "Master of Puppets");
